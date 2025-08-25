@@ -1,4 +1,4 @@
-def calculo_mascara(cidr: int):
+def calculo_mascara(cidr: int, coringa=False):
     """
         cidr: quantidade de bits da máscara que estão em 1.
         sub_rede: valor da sub rede
@@ -19,5 +19,7 @@ def calculo_mascara(cidr: int):
                 mascara.append(valor)
                 bits_restantes = 0
 
-    return ".".join(map(str, mascara))
+        if coringa:
+            mascara = [255 - x for x in mascara]
 
+    return ".".join(map(str, mascara))
