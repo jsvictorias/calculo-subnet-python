@@ -1,6 +1,6 @@
 import math
 
-def calculo_cidr(host_inicial, cidr=0):
+def calculo_cidr(host_inicial):
     """
         cidr: número de bits da rede 
         host_inicial: valor dos endereços necessários
