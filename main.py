@@ -3,15 +3,16 @@ from utils.calculo_mascara.main import calculo_mascara
 from utils.calculo_subnet.main import calculo_subnet
 
 cenario = {
-    'lapa': 1800,
-    'cambuci': 1500,
-    'pinheiros': 1900,
-    'osasco': 1400,
-    'jandira': 1200,
-    'carapicuiba': 1750
+    'sao_paulo': 3600,
+    'minas_gerais': 1700,
+    'rio_de_janeiro': 900,
+    'bahia': 400,
+    'santa_catarina': 200,
+    'povo_avancado_noc': 100,
+    'cpd': 50
 }
 
-ip_fornecido = '172.19.0.0'
+ip_fornecido = '172.29.0.0'
 
 def main():
 
