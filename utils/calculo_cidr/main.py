@@ -2,8 +2,7 @@ import math
 
 def calculo_cidr(host_inicial):
     """
-        cidr: número de bits da rede 
-        host_inicial: valor dos endereços necessários
+        Converte um host para achar o CIDR
     """
     # Acha a potência de 2 mais próxima que é a quantidade de bits para host.
 

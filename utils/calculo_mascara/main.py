@@ -1,7 +1,6 @@
 def calculo_mascara(cidr: int, coringa=False):
     """
-        cidr: quantidade de bits da máscara que estão em 1.
-        sub_rede: valor da sub rede
+        Cálcula a Máscara, o parametro coringa diz se quer a máscara coringa ou não
     """
 
     if cidr < 0 or cidr > 32:

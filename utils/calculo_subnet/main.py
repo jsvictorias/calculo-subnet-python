@@ -2,6 +2,8 @@ import ipaddress
 
 def calculo_subnet(ip: str, cidr, mascara):
     """
+        Calculo da SubNet baseado em um IP
+        Precisa receber o cidr e mascara das outras funções
     """
 
     rede = ipaddress.ip_network(f'{ip}/{cidr}', strict=False)
