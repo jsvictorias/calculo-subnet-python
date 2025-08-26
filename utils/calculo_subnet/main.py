@@ -6,7 +6,6 @@ def calculo_subnet(ip: str, cidr, mascara):
 
     rede = ipaddress.ip_network(f'{ip}/{cidr}', strict=False)
 
-    endereco = str(rede.network_address)
 
     broadcast = str(rede.broadcast_address)
 
