@@ -55,69 +55,62 @@ def ex3():
     print("           🎀 Exercício 3 🎀")
     print("=" * 40)
     
-    # Lista dos itens do exercício
+    # Lista dos itens do exercício - TODOS como strings de máscara
     exercicios = [
         ("3.1", "255.255.192.0"),
         ("3.2", "255.255.248.0"),
         ("3.3", "255.255.255.224"),
         ("3.4", "255.255.255.128"),
         ("3.5", "255.254.0.0"),
-        ("3.6", 26),  
-        ("3.7", 25),    
-        ("3.8", 25),  
-        ("3.9", 25),  
-        ("3.10", 10)  
+        ("3.6", "122"),  # Agora é string "122" (provavelmente máscara incompleta)
+        ("3.7", "130"),  # Agora é string "130"  
+        ("3.8", "126"),  # Agora é string "126"
+        ("3.9", "110"),  # Agora é string "110"
+        ("3.10", "10")   # Agora é string "10"
     ]
     
     for num, valor in exercicios:
         print(f"\n🌸 {num} - {valor}")
         print("-" * 30)
         
-        if isinstance(valor, int):
-            # É notação CIDR (número)
-            info = cidr_para_info(valor)
-            print(f"Notação CIDR: /{valor}")
-            print(f"Máscara correspondente: {calculo_mascara(valor)}")
-        else:
-            # É máscara decimal (string)
+        # Verificar se é uma máscara IPv4 completa
+        if '.' in valor:
+            # É máscara decimal completa (ex: 255.255.192.0)
             info = mascara_para_info(valor)
             print(f"Máscara: {valor}")
             print(f"Notação CIDR: /{info['cidr']}")
-        
-        print(f"Bits para host: {info['bits_host']}")
-        print(f"Total de endereços: {info['total_enderecos']}")
-        print(f"Hosts válidos: {info['hosts_validos']}")
-
-def ex3_alternativo():
-    """
-    Interpreta 3.6-3.9 como número de hosts necessários
-    """
-    print("\n" + "=" * 60)
-    print("🎀 Exercício 3 - Interpretação Alternativa (como hosts) 🎀")
-    print("=" * 60)
-    
-    hosts_items = [
-        ("3.6", 122),
-        ("3.7", 130), 
-        ("3.8", 126),
-        ("3.9", 110)
-    ]
-    
-    for num, hosts in hosts_items:
-        print(f"\n🌸 {num} - {hosts} hosts necessários")
-        print("-" * 40)
-        
-        # Usar sua função calculo_cidr existente
-        cidr_str = calculo_cidr(hosts)
-        cidr_num = int(cidr_str.strip('/'))
-        
-        print(f"Hosts necessários: {hosts}")
-        print(f"Notação CIDR necessária: {cidr_str}")
-        print(f"Máscara: {calculo_mascara(cidr_num)}")
-        
-        info = cidr_para_info(cidr_num)
-        print(f"Hosts suportados: {info['hosts_validos']}")
+            print(f"Bits para host: {info['bits_host']}")
+            print(f"Total de endereços: {info['total_enderecos']}")
+            print(f"Hosts válidos: {info['hosts_validos']}")
+            
+        else:
+            # Pode ser CIDR ou máscara incompleta - vamos interpretar como número
+            try:
+                numero = int(valor)
+                
+                # Se o número for pequeno (<= 32), interpretar como CIDR
+                if numero <= 32:
+                    info = cidr_para_info(numero)
+                    print(f"Notação CIDR: /{numero}")
+                    print(f"Máscara correspondente: {calculo_mascara(numero)}")
+                    print(f"Bits para host: {info['bits_host']}")
+                    print(f"Total de endereços: {info['total_enderecos']}")
+                    print(f"Hosts válidos: {info['hosts_validos']}")
+                
+                # Se o número for grande, interpretar como número de hosts
+                else:
+                    cidr_str = calculo_cidr(numero)
+                    cidr_num = int(cidr_str.strip('/'))
+                    info = cidr_para_info(cidr_num)
+                    
+                    print(f"Número fornecido: {numero}")
+                    print(f"Interpretado como: {numero} hosts necessários")
+                    print(f"Notação CIDR necessária: {cidr_str}")
+                    print(f"Máscara: {calculo_mascara(cidr_num)}")
+                    print(f"Hosts suportados: {info['hosts_validos']}")
+                    
+            except ValueError:
+                print(f"⚠️ Valor inválido: {valor}")
 
 if __name__ == "__main__":
     ex3()
-    ex3_alternativo()
